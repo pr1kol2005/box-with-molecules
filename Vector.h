@@ -17,7 +17,15 @@ class Vector {
 
   Vector operator/(double scalar) const;
 
+  Vector& operator+=(const Vector& other);
+
+  Vector& operator-=(const Vector& other);
+
+  Vector& operator*=(double scalar);
+
+  Vector& operator/=(double scalar);
+
   double Length() const;
 
-  Vector normal() const;
+  Vector Normal() const;
 };
