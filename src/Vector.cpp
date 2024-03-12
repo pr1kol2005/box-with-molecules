@@ -20,5 +20,9 @@ Vector Vector::operator/(double scalar) const {
 };
 
 double Vector::Length() const {
-  return sqrt(x * x + y * y);
+  return std::sqrt(x * x + y * y);
 };
+
+Vector Vector::normal() const {
+  return Vector(-y, x);
+}

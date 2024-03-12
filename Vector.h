@@ -18,4 +18,6 @@ class Vector {
   Vector operator/(double scalar) const;
 
   double Length() const;
+
+  Vector normal() const;
 };
