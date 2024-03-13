@@ -1,4 +1,4 @@
-#include "../includes/Simulation.h"
+#include "Simulation.h"
 
 #include <cmath>
 
@@ -16,7 +16,7 @@ void Simulation::RemoveLastParticle() {
 void Simulation::ManageCollisions() {
   size_t size = gas.size();
   for (size_t i = 0; i < size; i++) {
-    if (gas[i].CheckCollision(box)) {
+    if (box.CheckCollision(gas[i])) {
       Vector v = gas[i].velocity;
       Vector n = box.GetNormal(gas[i].position);
       Vector t = Vector(std::pow(n.y, 2), std::pow(n.x, 2));
