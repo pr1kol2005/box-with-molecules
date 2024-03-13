@@ -28,4 +28,8 @@ class Vector {
   double Length() const;
 
   Vector Normal() const;
+
+  double CrossProduct(const Vector& other) const;
+
+  double ScalarProduct(const Vector& other) const;
 };
