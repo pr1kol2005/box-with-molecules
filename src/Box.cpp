@@ -1,4 +1,4 @@
-#include "../Box.h"
+#include "../includes/Box.h"
 
 Box::Box(int width = 0, int height = 0) : width(width), height(height) {
 }

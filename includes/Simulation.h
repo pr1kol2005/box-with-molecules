@@ -16,6 +16,8 @@ class Simulation {
   void AddParticle(const Particle& molecule);
 
   void RemoveLastParticle();
+  
+  void ManageCollisions();
 
-  void Simulate();
+  void MoveParticles(double timeStep);
 };

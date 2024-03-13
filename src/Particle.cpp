@@ -1,4 +1,4 @@
-#include "../Particle.h"
+#include "../includes/Particle.h"
 
 Particle::Particle(const Vector& position, const Vector& velocity,
                    double radius, double mass) : position(position), velocity(velocity), radius(radius), mass(mass) {

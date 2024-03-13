@@ -1,4 +1,4 @@
-#include "Simulation.h"
+#include "../includes/Simulation.h"
 
 #include <cmath>
 
@@ -13,13 +13,13 @@ void Simulation::RemoveLastParticle() {
   gas.pop_back();
 }
 
-void Simulation::Simulate() {
+void Simulation::ManageCollisions() {
   size_t size = gas.size();
   for (size_t i = 0; i < size; i++) {
     if (gas[i].CheckCollision(box)) {
       Vector v = gas[i].velocity;
       Vector n = box.GetNormal(gas[i].position);
-      Vector t = Vector(std::pow(n.y, 2), std::pow(n.y, 2));
+      Vector t = Vector(std::pow(n.y, 2), std::pow(n.x, 2));
       gas[i].velocity = n * std::fabs(v.ScalarProduct(n)) + t * v.ScalarProduct(t);
     }
     for (size_t j = i + 1; j < size; j++) {
@@ -36,5 +36,11 @@ void Simulation::Simulate() {
         gas[j].velocity = t * v2.ScalarProduct(t) + (v2_n * (m2 - m1) + v1_n * 2 * m1) / (m1 + m2);
       }
     }
+  }
+}
+
+void Simulation::MoveParticles(double timeStep) {
+  for (size_t i = 0; i < gas.size(); i++) {
+    gas[i].UpdatePosition(timeStep);
   }
 }
