@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Vector.h"
-#include "Box.h"
 
 class Particle {
  public:
@@ -17,6 +16,4 @@ class Particle {
   void UpdatePosition(double timeStep);
 
   bool CheckCollision(const Particle& molecule);
-
-  bool CheckCollision(const Box& box);
 };

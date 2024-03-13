@@ -8,7 +8,9 @@ class Box {
   int width;
   int height;
 
-  Box(int width = 0, int height = 0);
+  Box(int width, int height);
 
   Vector GetNormal(const Vector& pos) const;
+
+  bool CheckCollision(const Particle& particle);
 };

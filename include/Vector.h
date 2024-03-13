@@ -7,7 +7,7 @@ class Vector {
   double x;
   double y;
 
-  Vector(double x1 = 0, double y1 = 0);
+  Vector(double x, double y);
 
   Vector operator+(const Vector& other) const;
 
