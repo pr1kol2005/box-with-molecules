@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
 #include <vector>
+#include <iostream>
 
 class GraphicsComponent {
  public:
