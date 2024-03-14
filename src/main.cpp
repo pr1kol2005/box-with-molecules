@@ -15,8 +15,8 @@ int main(int argc, char* argv[]) {
   Simulation simulation(gas, box);
   GraphicsComponent graphics;
 
-  simulation.gas.emplace_back(Vector(90, 100), Vector(10, 0), 1, 1);
-  simulation.gas.emplace_back(Vector(100, 100), Vector(-10, 0), 1, 1);
+  simulation.gas.emplace_back(Vector(90, 90), Vector(10, 10), 1, 1);
+  simulation.gas.emplace_back(Vector(100, 100), Vector(-10, -10), 1, 1);
   
   for (size_t i = 0; i < 1000; i++) {
     graphics.Render(simulation.gas, box);
