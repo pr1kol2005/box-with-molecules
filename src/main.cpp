@@ -5,10 +5,10 @@
 #include <QWidget>
 
 int main(int argc, char* argv[]) {
-  // QApplication app(argc, argv);
+  QApplication app(argc, argv);
 
-  // QWidget window;
-  // window.setWindowTitle("Molecules Simulation");
+  QWidget window;
+  window.setWindowTitle("Molecules Simulation");
   
   Box box(200, 200);
   std::vector<Particle> gas;
@@ -24,6 +24,6 @@ int main(int argc, char* argv[]) {
     simulation.MoveParticles(0.001);
   }
 
-  // window.show();
-  // return app.exec();
+  window.show();
+  return app.exec();
 }
