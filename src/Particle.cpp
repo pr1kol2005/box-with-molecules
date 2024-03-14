@@ -9,10 +9,11 @@ Vector Particle::GetImpulse() {
 };
 
 void Particle::UpdatePosition(double timeStep) {
-  position = position + velocity * timeStep;
+  position.x += velocity.x * timeStep;
+  position.y += velocity.y * timeStep;
 };
 
 bool Particle::CheckCollision(const Particle& molecule) {
-  double tolerance = 1e-6;
+  double tolerance = 1e-2;
   return (position - molecule.position).Length() - radius - molecule.radius < tolerance;
 };

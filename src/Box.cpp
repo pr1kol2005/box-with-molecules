@@ -20,7 +20,7 @@ Vector Box::GetNormal(const Vector& pos) const {
 }
 
 bool Box::CheckCollision(const Particle& particle) {
-  double tolerance = 1e-6;
+  double tolerance = particle.radius + 1e-2;
   return (particle.position.x < tolerance) || (particle.position.y < tolerance) ||
          ((width - particle.position.x) < tolerance) || ((height - particle.position.x) < tolerance);
 };
