@@ -3,10 +3,6 @@
 #include "Particle.h"
 #include "Box.h"
 
-#include <QApplication>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QGraphicsEllipseItem>
 #include <vector>
 #include <iostream>
 
