@@ -52,9 +52,9 @@ Vector Vector::Normal() const {
 }
 
 double Vector::CrossProduct(const Vector& other) const {
-  return x * other.x + y * other.y;
+  return x * other.y - y * other.x;
 }
 
 double Vector::ScalarProduct(const Vector& other) const {
-  return x * other.y - y * other.x;
+  return x * other.x + y * other.y;
 }
