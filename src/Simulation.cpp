@@ -1,8 +1,9 @@
 #include "Simulation.h"
 
 #include <cmath>
+#include <iostream>
 
-Simulation::Simulation(std::vector<Particle> gas, Box box) : gas(gas), box(box) {
+Simulation::Simulation(std::vector<Particle>& gas, Box& box) : gas(gas), box(box) {
 }
 
 void Simulation::AddParticle(const Particle& molecule) {
@@ -24,7 +25,7 @@ void Simulation::ManageCollisions() {
     }
     for (size_t j = i + 1; j < size; j++) {
       if(gas[i].CheckCollision(gas[j])) {
-        Vector n = gas[j].position - gas[i].position;
+        Vector n = (gas[j].position - gas[i].position) / (gas[j].position - gas[i].position).Length();
         Vector t = n.Normal();
         Vector v1 = gas[i].velocity;
         Vector v2 = gas[j].velocity;

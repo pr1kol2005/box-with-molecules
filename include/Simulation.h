@@ -11,7 +11,7 @@ class Simulation {
   std::vector<Particle> gas;
   Box box;
 
-  Simulation(std::vector<Particle> gas, Box box);
+  Simulation(std::vector<Particle>& gas, Box& box);
   
   void AddParticle(const Particle& molecule);
 
