@@ -10,7 +10,7 @@ void Simulation::AddParticle(const Particle& molecule) {
   gas.emplace_back(molecule);
 }
 
-void Simulation::RemoveLastParticle() {
+void Simulation::RemoveParticle() {
   gas.pop_back();
 }
 

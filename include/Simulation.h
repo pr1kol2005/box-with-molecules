@@ -15,7 +15,7 @@ class Simulation {
   
   void AddParticle(const Particle& molecule);
 
-  void RemoveLastParticle();
+  void RemoveParticle();
   
   void ManageCollisions();
 
