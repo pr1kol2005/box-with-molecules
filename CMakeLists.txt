@@ -15,21 +15,27 @@ qt_standard_project_setup()
 #=================== INCLUSION OF Project Files ====================#
 set(INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
+set(FORMS_DIR ${PROJECT_SOURCE_DIR}/src)
 
 include_directories(${INCLUDE_DIR})
 include_directories(${SOURCE_DIR})
+include_directories(${FORMS_DIR})
 
 file(GLOB_RECURSE SOURCES
+    ${FORMS_DIR}/*.ui
+    ${FORMS_DIR}/*.qrc
     ${INCLUDE_DIR}/*.h
     ${SOURCE_DIR}/*.cpp
 )
 
-#qt_add_executable(box_with_molecules main.cpp)
 #=================== SETUP EXECTUABLE ====================#
 # Enable debug logging on RELWITHDEBINFO configuration
 set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS
     $<$<CONFIG:RELWITHDEBINFO>:QT_MESSAGELOGCONTEXT>
 )
+
+# Add the forms directory to the AUTOUIC search paths
+set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_AUTOUIC_SEARCH_PATHS} ${FORMS_DIR})
 
 # Add the executable
 add_executable(box_with_molecules ${SOURCES})
