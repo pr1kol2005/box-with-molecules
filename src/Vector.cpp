@@ -1,60 +1,60 @@
 #include "Vector.h"
 
-Vector::Vector(double x, double y) : x(x), y(y) {
+Vector::Vector(double x, double y) : x_(x), y_(y) {
 }
 
 Vector Vector::operator+(const Vector& other) const {
-  return Vector(x + other.x, y + other.y);
+  return Vector(x_ + other.x_, y_ + other.y_);
 }
 
 Vector Vector::operator-(const Vector& other) const {
-  return Vector(x - other.x, y - other.y);
+  return Vector(x_ - other.x_, y_ - other.y_);
 }
 
 Vector Vector::operator*(double scalar) const {
-  return Vector(x * scalar, y * scalar);
+  return Vector(x_ * scalar, y_ * scalar);
 }
 
 Vector Vector::operator/(double scalar) const {
-  return Vector(x / scalar, y / scalar);
+  return Vector(x_ / scalar, y_ / scalar);
 }
 
 Vector& Vector::operator+=(const Vector& other) {
-  x += other.x;
-  y += other.y;
+  x_ += other.x_;
+  y_ += other.y_;
   return *this;
 }
 
 Vector& Vector::operator-=(const Vector& other) {
-  x -= other.x;
-  y -= other.y;
+  x_ -= other.x_;
+  y_ -= other.y_;
   return *this;
 }
 
 Vector& Vector::operator*=(double scalar) {
-  x *= scalar;
-  y *= scalar;
+  x_ *= scalar;
+  y_ *= scalar;
   return *this;
 }
 
 Vector& Vector::operator/=(double scalar) {
-  x /= scalar;
-  y /= scalar;
+  x_ /= scalar;
+  y_ /= scalar;
   return *this;
 }
 
 double Vector::Length() const {
-  return std::sqrt(x * x + y * y);
+  return std::sqrt(x_ * x_ + y_ * y_);
 }
 
 Vector Vector::Normal() const {
-  return Vector(-y, x);
+  return Vector(-y_, x_);
 }
 
 double Vector::CrossProduct(const Vector& other) const {
-  return x * other.y - y * other.x;
+  return x_ * other.y_ - y_ * other.x_;
 }
 
 double Vector::ScalarProduct(const Vector& other) const {
-  return x * other.x + y * other.y;
+  return x_ * other.x_ + y_ * other.y_;
 }
