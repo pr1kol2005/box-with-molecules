@@ -3,10 +3,10 @@
 #include <cmath>
 
 class Vector {
- public:
-  double x;
-  double y;
+  double x_;
+  double y_;
 
+ public:
   Vector(double x, double y);
 
   Vector operator+(const Vector& other) const;
@@ -32,4 +32,9 @@ class Vector {
   double CrossProduct(const Vector& other) const;
 
   double ScalarProduct(const Vector& other) const;
+
+  friend class Box;
+  friend class GraphicsComponent;
+  friend class Particle;
+  friend class Simulation;
 };

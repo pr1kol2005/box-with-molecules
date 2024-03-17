@@ -8,7 +8,6 @@
 
 class GraphicsComponent {
  public:
-
   GraphicsComponent();
 
   void Render(const std::vector<Particle>& gas, const Box& box);

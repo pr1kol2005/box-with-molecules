@@ -4,10 +4,10 @@
 #include "Particle.h"
 
 class Box {
- public:
-  int width;
-  int height;
+  int width_;
+  int height_;
 
+public:
   Box(int width, int height);
 
   Vector GetNormal(const Vector& pos) const;

@@ -7,11 +7,13 @@
 #include "Particle.h"
 
 class Simulation {
- public:
-  std::vector<Particle> gas;
-  Box box;
+  std::vector<Particle> gas_;
+  Box box_;
 
+ public:
   Simulation(std::vector<Particle>& gas, Box& box);
+
+  std::vector<Particle>& GetGas();
   
   void AddParticle(const Particle& molecule);
 
