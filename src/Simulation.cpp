@@ -18,6 +18,10 @@ void Simulation::RemoveParticle() {
   gas_.pop_back();
 }
 
+Vector AbsolutelyElasticCollision(const Vector& t, const Vector& v1, const Vector& v1_n, const Vector& v2_n, double m1, double m2) {
+  return t * v1.ScalarProduct(t) + (v1_n * (m1 - m2) + v2_n * 2 * m2) / (m1 + m2);
+}
+
 void Simulation::ManageCollisions() {
   size_t size = gas_.size();
   for (size_t i = 0; i < size; i++) {
@@ -37,8 +41,8 @@ void Simulation::ManageCollisions() {
         Vector v2_n = n * v2.ScalarProduct(n);
         double m1 = gas_[i].mass_;
         double m2 = gas_[j].mass_;
-        gas_[i].velocity_ = t * v1.ScalarProduct(t) + (v1_n * (m1 - m2) + v2_n * 2 * m2) / (m1 + m2);
-        gas_[j].velocity_ = t * v2.ScalarProduct(t) + (v2_n * (m2 - m1) + v1_n * 2 * m1) / (m1 + m2);
+        gas_[i].velocity_ = AbsolutelyElasticCollision(t, v1, v1_n, v2_n, m1, m2);
+        gas_[j].velocity_ = AbsolutelyElasticCollision(t, v2, v2_n, v1_n, m2, m1);
       }
     }
   }

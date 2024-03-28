@@ -23,3 +23,5 @@ class Simulation {
 
   void MoveParticles(double timeStep);
 };
+
+Vector AbsolutelyElasticCollision(const Vector& t, const Vector& v1, const Vector& v1_n, const Vector& v2_n, double m1, double m2);
