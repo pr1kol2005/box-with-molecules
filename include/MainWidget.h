@@ -9,10 +9,9 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsPixmapItem>
 
+#include <QTimer>
 
-namespace Ui {
-class MainWidget;
-}
+#include "Particle.h"
 
 namespace Ui {
 class MainWidget;
@@ -23,8 +22,17 @@ class MainWidget : public QWidget {
 
   Ui::MainWidget* ui_;
   QGraphicsScene* scene_;
+  QTimer* timer_;
+
 
  public:
   explicit MainWidget(QWidget* parent = nullptr);
   ~MainWidget();
+};
+
+class ParticleImage : public QGraphicsEllipseItem {
+ public:
+  ParticleImage(Particle molecule);
+
+  virtual void advance(int phase);
 };
