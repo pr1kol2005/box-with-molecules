@@ -6,12 +6,10 @@
 
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
-#include <QGraphicsLineItem>
-#include <QGraphicsPixmapItem>
 
 #include <QTimer>
 
-#include "Particle.h"
+#include "ParticleImage.h"
 
 namespace Ui {
 class MainWidget;
@@ -28,11 +26,4 @@ class MainWidget : public QWidget {
  public:
   explicit MainWidget(QWidget* parent = nullptr);
   ~MainWidget();
-};
-
-class ParticleImage : public QGraphicsEllipseItem {
- public:
-  ParticleImage(Particle molecule);
-
-  virtual void advance(int phase);
 };

@@ -23,19 +23,3 @@ MainWidget::~MainWidget()
   delete scene_;
   delete timer_;
 }
-
-void ParticleImage::advance(int phase) {
-  // 0 phase - calculations
-  // 1 phase - render
-
-  if (phase) {
-    setPos(rand() % 600, rand() % 600);
-  }
-}
-
-ParticleImage::ParticleImage(Particle molecule) {
-  QColor color = QColor(255, 0 , 0);
-  setBrush(color);
-  setRect(0, 0, 50, 50);
-  setPos(100, 100);
-}
