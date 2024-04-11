@@ -10,6 +10,7 @@
 #include <QTimer>
 
 #include "ParticleImage.h"
+#include "constants.h"
 
 namespace Ui {
 class MainWidget;

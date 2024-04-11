@@ -10,11 +10,11 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent), ui_(new Ui::MainWidge
   ui_->graphicsView->setScene(scene_);
 
   scene_->addRect(scene_->sceneRect());
-  scene_->addItem(new ParticleImage(Particle(Vector(90, 90), Vector(10, 10), 1, 1)));
+  scene_->addItem(new ParticleImage(new Particle(Vector(90, 90), Vector(10, 10), 50, 1)));
 
   timer_ = new QTimer(this);
   connect(timer_, SIGNAL(timeout()), scene_, SLOT(advance()));
-  timer_->start(1000 / 1);
+  timer_->start(FPS);
 }
 
 MainWidget::~MainWidget()
