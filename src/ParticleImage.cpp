@@ -1,10 +1,12 @@
 #include "ParticleImage.h"
 
-ParticleImage::ParticleImage(Particle molecule) {
-  QColor color = QColor(255, 255 , 0);
+ParticleImage::ParticleImage(Particle* molecule) : molecule_(molecule){
+  QColor color = QColor(255, 255, 0);
   setBrush(color);
-  setRect(0, 0, 50, 50);
-  setPos(100, 100);
+
+  setRect(0, 0, molecule_->radius_, molecule_->radius_);
+
+  setPos(molecule_->position_.x_, molecule_->position_.y_);
 }
 
 void ParticleImage::advance(int phase) {
@@ -12,7 +14,7 @@ void ParticleImage::advance(int phase) {
   // 1 phase - render
 
   if (phase) {
-    setPos(rand() % 600, rand() % 600);
+    moveBy(molecule_->velocity_.x_ * TIME_INTERVAL, molecule_->velocity_.y_ * TIME_INTERVAL);
   }
 }
 

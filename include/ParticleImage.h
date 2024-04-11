@@ -10,12 +10,13 @@
 #include <QTimer>
 
 #include "Particle.h"
+#include "constants.h"
 
 class ParticleImage : public QGraphicsEllipseItem {
   Particle* molecule_;
 
  public:
-  ParticleImage(Particle molecule);
+  ParticleImage(Particle* molecule);
 
   ~ParticleImage();
 
