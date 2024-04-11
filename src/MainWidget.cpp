@@ -1,7 +1,7 @@
 #include "MainWidget.h"
 #include "ui_mainwidget.h"
 
-MainWidget::MainWidget(QWidget *parent) : QWidget(parent), ui_(new Ui::MainWidget)
+MainWidget::MainWidget(QWidget *parent, Simulation& simulation) : QWidget(parent), ui_(new Ui::MainWidget), simulation_(simulation)
 {
   ui_->setupUi(this);
 
@@ -10,12 +10,24 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent), ui_(new Ui::MainWidge
   ui_->graphicsView->setScene(scene_);
 
   scene_->addRect(scene_->sceneRect());
-  scene_->addItem(new ParticleImage(new Particle(Vector(0, 0), Vector(10, 10), 20, 1)));
-  scene_->addItem(new ParticleImage(new Particle(Vector(800, 600), Vector(-10, -10), 20, 1)));
+
+  for (size_t i = 0; i < simulation.gas_.size(); i++) {
+    scene_->addItem(new ParticleImage(simulation_.gas_.data() + i));
+  }
 
   timer_ = new QTimer(this);
+  connect(timer_, SIGNAL(timeout()), this, SLOT(ManageCollisions()));
+  connect(timer_, SIGNAL(timeout()), this, SLOT(MoveParticles()));
   connect(timer_, SIGNAL(timeout()), scene_, SLOT(advance()));
   timer_->start(FPS);
+}
+
+void MainWidget::ManageCollisions() {
+  simulation_.ManageCollisions();
+}
+
+void MainWidget::MoveParticles() {
+  simulation_.MoveParticles(TIME_INTERVAL);
 }
 
 MainWidget::~MainWidget()

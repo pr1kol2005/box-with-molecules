@@ -11,6 +11,7 @@
 
 #include "ParticleImage.h"
 #include "constants.h"
+#include "Simulation.h"
 
 namespace Ui {
 class MainWidget;
@@ -22,9 +23,13 @@ class MainWidget : public QWidget {
   Ui::MainWidget* ui_;
   QGraphicsScene* scene_;
   QTimer* timer_;
-
+  Simulation simulation_;
 
  public:
-  explicit MainWidget(QWidget* parent = nullptr);
+  explicit MainWidget(QWidget* parent, Simulation& simulation);
   ~MainWidget();
+
+ private slots:
+  void ManageCollisions();
+  void MoveParticles();
 };
