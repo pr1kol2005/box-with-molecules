@@ -1,13 +1,10 @@
 #include <QWidget>
 
-#include <QGraphicsView>
-#include <QGraphicsScene>
 #include <QGraphicsItem>
 
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
 
-#include <QTimer>
 
 #include "Particle.h"
 #include "constants.h"
