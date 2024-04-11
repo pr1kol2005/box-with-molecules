@@ -5,7 +5,7 @@
 #include <QApplication>
 
 int main(int argc, char* argv[]) {
-  // Box box(200, 200);
+  // Box box(BOX_WIDTH, BOX_HEIGHT);
   // std::vector<Particle> gas;
   // Simulation simulation(gas, box);
   // GraphicsComponent graphics;
