@@ -10,6 +10,8 @@ const int BOX_WIDTH = 800;
 
 const int BOX_HEIGHT = 600;
 
+const int PARTICLE_SIZE = 10;
+
 const Vector LEFT_WALL_NORMAL = Vector(1, 0);
 
 const Vector RIGHT_WALL_NORMAL = Vector(-1, 0);
