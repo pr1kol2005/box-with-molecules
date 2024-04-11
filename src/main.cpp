@@ -2,26 +2,23 @@
 #include "GraphicsComponent.h"
 #include "MainWidget.h"
 
+#include <random>
 #include <QApplication>
 
 int main(int argc, char* argv[]) {
-  // Box box(BOX_WIDTH, BOX_HEIGHT);
-  // std::vector<Particle> gas;
-  // Simulation simulation(gas, box);
-  // GraphicsComponent graphics;
+  Box box(BOX_WIDTH, BOX_HEIGHT);
+  std::vector<Particle> gas;
+  Simulation simulation(gas, box);
+  GraphicsComponent graphics;
 
-  // simulation.AddParticle(Particle(Vector(90, 90), Vector(10, 10), 1, 1));
-  // simulation.AddParticle(Particle(Vector(100, 100), Vector(-10, -10), 1, 1));
-  // simulation.AddParticle(Particle(Vector(195, 100), Vector(10, 0), 1, 1));
-  
-  // for (size_t i = 0; i < 1000; i++) {
-  //   graphics.Render(simulation.GetGas(), box);
-  //   simulation.ManageCollisions();
-  //   simulation.MoveParticles(0.001);
-  // }
+  for (int i = 0; i < 100; i++) {
+    simulation.AddParticle(Particle(Vector(PARTICLE_SIZE + (1 + ( std::rand() % (BOX_WIDTH / (2 * PARTICLE_SIZE) - 1))) * 2 * PARTICLE_SIZE,
+                                           PARTICLE_SIZE + (1 + ( std::rand() % (BOX_HEIGHT / (2 * PARTICLE_SIZE) - 1))) * 2 * PARTICLE_SIZE),
+                                    Vector(std::rand() % 500, std::rand() % 500), PARTICLE_SIZE, 1));
+  }
 
   QApplication a(argc, argv);
-  MainWidget w;
+  MainWidget w(nullptr, simulation);
   w.show();
   return a.exec();
 }
