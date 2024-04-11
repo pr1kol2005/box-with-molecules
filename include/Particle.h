@@ -20,4 +20,5 @@ class Particle {
   friend class Box;
   friend class GraphicsComponent;
   friend class Simulation;
+  friend class ParticleImage;
 };
