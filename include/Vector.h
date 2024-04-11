@@ -37,4 +37,6 @@ class Vector {
   friend class GraphicsComponent;
   friend class Particle;
   friend class Simulation;
+  friend class ParticleImage;
+  friend class MainWidget;
 };
