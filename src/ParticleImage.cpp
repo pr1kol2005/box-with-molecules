@@ -14,10 +14,6 @@ void ParticleImage::advance(int phase) {
   // 1 phase - render
 
   if (phase) {
-    moveBy(molecule_->velocity_.x_ * TIME_INTERVAL, molecule_->velocity_.y_ * TIME_INTERVAL);
+    setPos(molecule_->position_.x_ - molecule_->radius_, molecule_->position_.y_ - molecule_->radius_);
   }
-}
-
-ParticleImage::~ParticleImage() {
-  delete molecule_;
 }
