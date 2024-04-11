@@ -4,9 +4,9 @@ ParticleImage::ParticleImage(Particle* molecule) : molecule_(molecule){
   QColor color = QColor(255, 255, 0);
   setBrush(color);
 
-  setRect(0, 0, molecule_->radius_, molecule_->radius_);
+  setRect(0, 0, molecule_->radius_ * 2, molecule_->radius_ * 2);
 
-  setPos(molecule_->position_.x_, molecule_->position_.y_);
+  setPos(molecule_->position_.x_ - molecule_->radius_, molecule_->position_.y_ - molecule_->radius_);
 }
 
 void ParticleImage::advance(int phase) {
