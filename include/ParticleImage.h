@@ -18,7 +18,5 @@ class ParticleImage : public QGraphicsEllipseItem {
  public:
   ParticleImage(Particle* molecule);
 
-  ~ParticleImage();
-
   virtual void advance(int phase);
 };
