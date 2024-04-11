@@ -15,6 +15,6 @@ void Particle::UpdatePosition(double timeStep) {
 };
 
 bool Particle::CheckCollision(const Particle& molecule) {
-  double gap = radius_ + molecule.radius_ + TOLERANCE;
+  double gap = radius_ + molecule.radius_ + TIME_INTERVAL * (velocity_.Length() + molecule.velocity_.Length());
   return (position_ - molecule.position_).Length() < gap;
 };

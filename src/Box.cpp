@@ -21,7 +21,7 @@ Vector Box::GetNormal(const Vector& pos) const {
 }
 
 bool Box::CheckCollision(const Particle& particle) {
-  double gap = particle.radius_ + TOLERANCE;
+  double gap = particle.radius_ + particle.velocity_.Length() * TIME_INTERVAL;
   return (particle.position_.x_ < gap) || (particle.position_.y_ < gap) ||
          ((width_ - particle.position_.x_) < gap) || ((height_ - particle.position_.x_) < gap);
 };
