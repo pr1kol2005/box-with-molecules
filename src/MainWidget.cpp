@@ -5,6 +5,8 @@ MainWidget::MainWidget(QWidget *parent, Simulation& simulation) : QWidget(parent
 {
   ui_->setupUi(this);
 
+  resize(BOX_WIDTH + 100, BOX_HEIGHT + 100);
+
   scene_ = new QGraphicsScene(0, 0, BOX_WIDTH, BOX_HEIGHT, this);
 
   ui_->graphicsView->setScene(scene_);
