@@ -16,6 +16,7 @@ class Simulation {
  public:
   Simulation(std::vector<Particle>& gas, Box& box);
 
+  ~Simulation();
 
   std::vector<Particle>& GetGas();
   

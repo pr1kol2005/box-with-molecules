@@ -13,6 +13,11 @@ Simulation::Simulation(std::vector<Particle>& gas, Box& box) : gas_(gas), box_(b
   }
 }
 
+Simulation::~Simulation() {
+  for (size_t i = 0; i < GRID_WIDTH + 2; i++) {
+    delete[] grid_[i];
+  }
+  delete[] grid_;
 }
 
 std::vector<Particle>& Simulation::GetGas(){
