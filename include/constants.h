@@ -23,3 +23,7 @@ const Vector RIGHT_WALL_NORMAL = Vector(-1, 0);
 const Vector TOP_WALL_NORMAL = Vector(0, -1);
 
 const Vector BOTTOM_WALL_NORMAL = Vector(0, 1);
+
+const int GRID_WIDTH = BOX_WIDTH / (PARTICLE_SIZE * 2);
+
+const int GRID_HEIGHT = BOX_HEIGHT / (PARTICLE_SIZE * 2);
