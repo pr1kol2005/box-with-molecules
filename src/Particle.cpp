@@ -2,7 +2,7 @@
 #include "constants.h"
 
 Particle::Particle(const Vector& position, const Vector& velocity,
-                   int radius, double mass) : position_(position), velocity_(velocity), radius_(radius), mass_(mass) {
+                   double radius, double mass) : position_(position), velocity_(velocity), radius_(radius), mass_(mass) {
 };
 
 Vector Particle::GetImpulse() {
