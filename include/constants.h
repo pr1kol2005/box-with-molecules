@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include "Vector.h"
 
 const double FPS = 1000 / 100;
 
@@ -12,9 +12,9 @@ const int BOX_HEIGHT = 600;
 
 const int PARTICLE_SIZE = 10;
 
-const int PARTICLE_NUMBER = 100;
+const int PARTICLE_SPAWN_NUMBER = 100;
 
-const int MAX_SPAWN_VELOCITY = 200;
+const int MAX_SPAWN_VELOCITY = 300;
 
 const Vector LEFT_WALL_NORMAL = Vector(1, 0);
 

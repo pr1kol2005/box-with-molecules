@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
   Simulation simulation(gas, box);
   std::srand(std::time(0));
 
-  for (int i = 0; i < PARTICLE_NUMBER; i++) {
+  for (int i = 0; i < PARTICLE_SPAWN_NUMBER; i++) {
     simulation.AddParticle(Particle(Vector(PARTICLE_SIZE + (1 + ( std::rand() % (BOX_WIDTH / (2 * PARTICLE_SIZE) - 1))) * 2 * PARTICLE_SIZE,
                                            PARTICLE_SIZE + (1 + ( std::rand() % (BOX_HEIGHT / (2 * PARTICLE_SIZE) - 1))) * 2 * PARTICLE_SIZE),
                                     Vector(MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY),
