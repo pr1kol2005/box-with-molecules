@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
   for (int i = 0; i < PARTICLE_NUMBER; i++) {
     simulation.AddParticle(Particle(Vector(PARTICLE_SIZE + (1 + ( std::rand() % (BOX_WIDTH / (2 * PARTICLE_SIZE) - 1))) * 2 * PARTICLE_SIZE,
                                            PARTICLE_SIZE + (1 + ( std::rand() % (BOX_HEIGHT / (2 * PARTICLE_SIZE) - 1))) * 2 * PARTICLE_SIZE),
-                                    Vector(std::rand() % 500, std::rand() % 500), PARTICLE_SIZE, 1));
+                                    Vector(std::rand() % MAX_SPAWN_VELOCITY, std::rand() % MAX_SPAWN_VELOCITY), PARTICLE_SIZE, 1));
   }
 
   QApplication a(argc, argv);
