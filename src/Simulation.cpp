@@ -41,8 +41,10 @@ void Simulation::ManageCollisions() {
         Vector v2_n = n * v2.ScalarProduct(n);
         double m1 = gas_[i].mass_;
         double m2 = gas_[j].mass_;
-        gas_[i].velocity_ = AbsolutelyElasticCollision(t, v1, v1_n, v2_n, m1, m2);
-        gas_[j].velocity_ = AbsolutelyElasticCollision(t, v2, v2_n, v1_n, m2, m1);
+        if ((v2_n - v1_n).ScalarProduct(gas_[j].position_ - gas_[i].position_) <= 0) {
+          gas_[i].velocity_ = AbsolutelyElasticCollision(t, v1, v1_n, v2_n, m1, m2);
+          gas_[j].velocity_ = AbsolutelyElasticCollision(t, v2, v2_n, v1_n, m2, m1);
+        }
       }
     }
   }
