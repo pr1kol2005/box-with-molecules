@@ -2,7 +2,7 @@
 #include "constants.h"
 
 Particle::Particle(const Vector& position, const Vector& velocity,
-                   double radius, double mass) : position_(position), velocity_(velocity), radius_(radius), mass_(mass) {
+                   int radius, double mass) : position_(position), velocity_(velocity), radius_(radius), mass_(mass) {
 };
 
 Vector Particle::GetImpulse() {
@@ -15,6 +15,6 @@ void Particle::UpdatePosition(double timeStep) {
 };
 
 bool Particle::CheckCollision(const Particle& molecule) {
-  double gap = radius_ + molecule.radius_ + TOLERANCE;
+  double gap = radius_ + molecule.radius_;
   return (position_ - molecule.position_).Length() < gap;
 };

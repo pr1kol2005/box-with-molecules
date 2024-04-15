@@ -1,30 +1,25 @@
 #include "Simulation.h"
-#include "GraphicsComponent.h"
+#include "MainWidget.h"
 
+#include <random>
 #include <QApplication>
-#include <QWidget>
 
 int main(int argc, char* argv[]) {
-  // QApplication app(argc, argv);
-
-  // QWidget window;
-  // window.setWindowTitle("Molecules Simulation");
-  
-  Box box(200, 200);
+  Box box(BOX_WIDTH, BOX_HEIGHT);
   std::vector<Particle> gas;
   Simulation simulation(gas, box);
-  GraphicsComponent graphics;
+  std::srand(std::time(0));
 
-  simulation.AddParticle(Particle(Vector(90, 90), Vector(10, 10), 1, 1));
-  simulation.AddParticle(Particle(Vector(100, 100), Vector(-10, -10), 1, 1));
-  simulation.AddParticle(Particle(Vector(195, 100), Vector(10, 0), 1, 1));
-  
-  for (size_t i = 0; i < 1000; i++) {
-    graphics.Render(simulation.GetGas(), box);
-    simulation.ManageCollisions();
-    simulation.MoveParticles(0.001);
+  for (int i = 0; i < PARTICLE_SPAWN_NUMBER; i++) {
+    simulation.AddParticle(Particle(Vector(PARTICLE_SIZE + (1 + ( std::rand() % (BOX_WIDTH / (2 * PARTICLE_SIZE) - 1))) * 2 * PARTICLE_SIZE,
+                                           PARTICLE_SIZE + (1 + ( std::rand() % (BOX_HEIGHT / (2 * PARTICLE_SIZE) - 1))) * 2 * PARTICLE_SIZE),
+                                    Vector(MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY),
+                                           MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)),
+                                    PARTICLE_SIZE, 1));
   }
 
-  // window.show();
-  // return app.exec();
+  QApplication a(argc, argv);
+  MainWidget w(nullptr, simulation);
+  w.show();
+  return a.exec();
 }
