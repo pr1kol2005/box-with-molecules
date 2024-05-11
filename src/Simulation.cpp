@@ -10,7 +10,6 @@ Simulation::Simulation(std::vector<Particle>& gas, Box& box) : gas_(gas), box_(b
   for (size_t i = 0; i <= GRID_HEIGHT; i++) {
     grid_.emplace_back(std::vector<Particle*>(GRID_WIDTH + 1, nullptr));
   }
-  //std::cout << grid_.size() << '\n';
 }
 
 void Simulation::RandomSpawn() {
@@ -44,15 +43,15 @@ void Simulation::RemoveParticle() {
   gas_.pop_back();
 }
 
-Vector AbsolutelyElasticCollision(const Vector& t, const Vector& v1, const Vector& v1_n, const Vector& v2_n, double m1, double m2) {
-  return t * v1.ScalarProduct(t) + (v1_n * (m1 - m2) + v2_n * 2 * m2) / (m1 + m2);
-}
-
 void Simulation::BoxCollision(Particle* curr) {
   Vector v = curr->velocity_;
+  Vector p = curr->GetImpulse();
   Vector n = box_.GetNormal(curr->position_);
   Vector t = Vector(std::pow(n.y_, 2), std::pow(n.x_, 2));
   curr->velocity_ = n * std::fabs(v.ScalarProduct(n)) + t * v.ScalarProduct(t);
+
+  double dp_n = 2 * std::fabs(p.ScalarProduct(n));
+  p_ += dp_n;
 }
 
 void Simulation::ParticleCollision(Particle* curr, Particle* other) {
@@ -123,8 +122,14 @@ void Simulation::ManageCollisionsSquared() {
   }
 }
 
-void Simulation::MoveParticles(double timeStep) {
+void Simulation::MoveParticles(double time_step) {
   for (size_t i = 0; i < gas_.size(); i++) {
-    gas_[i].UpdatePosition(timeStep);
+    gas_[i].UpdatePosition(time_step);
+    v_avg_ += gas_[i].velocity_.Length();
+    E_avg_ += gas_[i].mass_ * gas_[i].velocity_.Length() * gas_[i].velocity_.Length() / 2;
   }
+}
+
+Vector AbsolutelyElasticCollision(const Vector& t, const Vector& v1, const Vector& v1_n, const Vector& v2_n, double m1, double m2) {
+  return t * v1.ScalarProduct(t) + (v1_n * (m1 - m2) + v2_n * 2 * m2) / (m1 + m2);
 }

@@ -22,7 +22,8 @@ MainWidget::MainWidget(QWidget *parent, Simulation& simulation) : QWidget(parent
 
   ui_->label_1->setText(QString("N = ") + QString::number(PARTICLE_SPAWN_NUMBER));
 
-  ui_->label_2->setText(QString("V = ") + QString::number(BOX_WIDTH * BOX_HEIGHT * (2 * PARTICLE_SIZE)));
+  ui_->label_2->setText(QString("V - b = ") + QString::number(BOX_WIDTH * BOX_HEIGHT * (2 * PARTICLE_SIZE) -
+                                                              PARTICLE_SPAWN_NUMBER * (4 / 3) * 3.14 * std::pow(PARTICLE_SIZE, 3)));
 
   timer_ = new QTimer(this);
   value_timer_ = new QTimer(this);
@@ -50,6 +51,11 @@ void MainWidget::MoveParticles() {
 }
 
 void MainWidget::UpdateValues() {
+  simulation_.p_ /= (TIME_INTERVAL * (VALUE_UPDATE_INTERVAL / FPS * (2 * 2 * PARTICLE_SIZE * (BOX_HEIGHT + BOX_WIDTH))));
+  simulation_.v_avg_ /= (PARTICLE_SPAWN_NUMBER * VALUE_UPDATE_INTERVAL / FPS);
+  simulation_.E_avg_ /= (PARTICLE_SPAWN_NUMBER * VALUE_UPDATE_INTERVAL / FPS);
+  simulation_.kT_ = ((simulation_.E_avg_ / 3) * 2);
+
   ui_->label_3->setText(QString("p = ") + QString::number(simulation_.p_));
   ui_->label_4->setText(QString("<v> = ") + QString::number(simulation_.v_avg_));
   ui_->label_5->setText(QString("<E> = ") + QString::number(simulation_.E_avg_));
