@@ -80,8 +80,8 @@ void Simulation::ManageCollisionsLinear() {
     grid_[y][x] = &gas_[i];
   }
 
-  int dy_arr[] = {-1, -1, -1, 0, 0, 1, 1, 1};
-  int dx_arr[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+  int dy_arr[] = {-1, -1, -1, 0, 0, 1, 1, 1, 0};
+  int dx_arr[] = {-1, 0, 1, -1, 1, -1, 0, 1, 0};
 
   for (size_t i = 0; i <= GRID_HEIGHT; ++i) {
     for (size_t j = 0; j <= GRID_WIDTH; ++j) {
@@ -94,7 +94,7 @@ void Simulation::ManageCollisionsLinear() {
         BoxCollision(curr);
       }
 
-      for (int k = 0; k < 8; k++) {
+      for (int k = 0; k < 9; k++) {
         int dy = dy_arr[k];
         int dx = dx_arr[k];
         if (0 <= i + dy && i + dy <= GRID_HEIGHT && 0 <= j + dx && j + dx <= GRID_WIDTH) {
