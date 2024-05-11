@@ -7,7 +7,12 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
 
+#include <QString>
+
 #include <QTimer>
+
+#include <QStandardItem>
+#include <QStandardItemModel>
 
 #include "ParticleImage.h"
 #include "constants.h"
@@ -32,4 +37,5 @@ class MainWidget : public QWidget {
  private slots:
   void ManageCollisions();
   void MoveParticles();
+  void UpdateValues();
 };

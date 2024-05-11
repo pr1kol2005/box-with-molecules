@@ -3,7 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-Simulation::Simulation(std::vector<Particle>& gas, Box& box) : gas_(gas), box_(box) {
+Simulation::Simulation(std::vector<Particle>& gas, Box& box) : gas_(gas), box_(box), p_(0), v_avg_(0), E_avg_(0), kT_(0) {
   grid_.reserve(GRID_HEIGHT + 1);
   for (size_t i = 0; i <= GRID_HEIGHT; i++) {
     grid_.emplace_back(std::vector<Particle*>(GRID_WIDTH + 1, nullptr));

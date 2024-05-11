@@ -12,6 +12,11 @@ class Simulation {
   std::vector<Particle> gas_;
   Box box_;
   std::vector<std::vector<Particle*>> grid_;
+  double p_;
+  double v_avg_;
+  double E_avg_;
+  double kT_;
+
 
  public:
   Simulation(std::vector<Particle>& gas, Box& box);
