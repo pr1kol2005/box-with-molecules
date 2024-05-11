@@ -1,7 +1,6 @@
 #include "Simulation.h"
 #include "MainWidget.h"
 
-#include <random>
 #include <QApplication>
 
 int main(int argc, char* argv[]) {
