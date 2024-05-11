@@ -1,6 +1,9 @@
 #include "MainWidget.h"
 #include "ui_mainwidget.h"
 
+#include <cmath>
+#include <iostream>
+
 MainWidget::MainWidget(QWidget *parent, Simulation& simulation) : QWidget(parent), ui_(new Ui::MainWidget), simulation_(simulation)
 {
   ui_->setupUi(this);
@@ -22,11 +25,13 @@ MainWidget::MainWidget(QWidget *parent, Simulation& simulation) : QWidget(parent
   ui_->label_2->setText(QString("V = ") + QString::number(BOX_WIDTH * BOX_HEIGHT * (2 * PARTICLE_SIZE)));
 
   timer_ = new QTimer(this);
+  value_timer_ = new QTimer(this);
   connect(timer_, SIGNAL(timeout()), this, SLOT(ManageCollisions()));
   connect(timer_, SIGNAL(timeout()), this, SLOT(MoveParticles()));
   connect(timer_, SIGNAL(timeout()), scene_, SLOT(advance()));
-  connect(timer_, SIGNAL(timeout()), this, SLOT(UpdateValues()));
+  connect(value_timer_, SIGNAL(timeout()), this, SLOT(UpdateValues()));
   timer_->start(FPS);
+  value_timer_->start(VALUE_UPDATE_INTERVAL);
 }
 
 // able to choose: linear — O(M) / squared — O(N^2)
@@ -56,4 +61,5 @@ MainWidget::~MainWidget()
   delete ui_;
   delete scene_;
   delete timer_;
+  delete value_timer_;
 }

@@ -6,6 +6,8 @@ const double FPS = 1000 / 100;
 
 const double TIME_INTERVAL = FPS / 1000;
 
+const int VALUE_UPDATE_INTERVAL = 1000;
+
 const int BOX_WIDTH = 800;
 
 const int BOX_HEIGHT = 600;

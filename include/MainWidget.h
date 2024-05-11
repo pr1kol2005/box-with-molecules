@@ -28,6 +28,7 @@ class MainWidget : public QWidget {
   Ui::MainWidget* ui_;
   QGraphicsScene* scene_;
   QTimer* timer_;
+  QTimer* value_timer_;
   Simulation simulation_;
 
  public:
