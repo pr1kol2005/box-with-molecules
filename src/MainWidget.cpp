@@ -42,7 +42,7 @@ void MainWidget::ManageCollisions() {
   if (GRID_HEIGHT * GRID_WIDTH * 10 < PARTICLE_SPAWN_NUMBER * PARTICLE_SPAWN_NUMBER) {
     simulation_.ManageCollisionsLinear();
   } else {
-  simulation_.ManageCollisionsSquared();
+    simulation_.ManageCollisionsSquared();
   }
 }
 
