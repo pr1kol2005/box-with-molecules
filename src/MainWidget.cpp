@@ -24,8 +24,10 @@ MainWidget::MainWidget(QWidget *parent, Simulation& simulation) : QWidget(parent
   timer_->start(FPS);
 }
 
+// able to choose: linear — O(N) / squared — O(N^2)
+// linear collision check is less reliable
 void MainWidget::ManageCollisions() {
-  simulation_.ManageCollisions();
+  simulation_.ManageCollisionsLinear();
 }
 
 void MainWidget::MoveParticles() {
