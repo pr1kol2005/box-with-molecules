@@ -2,8 +2,10 @@
 
 #include <cmath>
 #include <iostream>
+#include <random>
 
-Simulation::Simulation(std::vector<Particle>& gas, Box& box) : gas_(gas), box_(box), p_(0), v_avg_(0), E_avg_(0), kT_(0) {
+Simulation::Simulation(std::vector<Particle>& gas, Box& box) : gas_(gas), box_(box) {
+  ResetThermodynamicValues();
   grid_.reserve(GRID_HEIGHT + 1);
   for (size_t i = 0; i <= GRID_HEIGHT; i++) {
     grid_.emplace_back(std::vector<Particle*>(GRID_WIDTH + 1, nullptr));
@@ -21,6 +23,13 @@ void Simulation::RandomSpawn() {
                                 MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)),
                          PARTICLE_SIZE, 1));                                
   }
+}
+
+void Simulation::ResetThermodynamicValues() {
+  p_ = 0;
+  v_avg_ = 0;
+  E_avg_ = 0;
+  kT_ = 0;
 }
 
 std::vector<Particle>& Simulation::GetGas() {

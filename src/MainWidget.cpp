@@ -54,6 +54,7 @@ void MainWidget::UpdateValues() {
   ui_->label_4->setText(QString("<v> = ") + QString::number(simulation_.v_avg_));
   ui_->label_5->setText(QString("<E> = ") + QString::number(simulation_.E_avg_));
   ui_->label_6->setText(QString("kT = ") + QString::number(simulation_.kT_));
+  simulation_.ResetThermodynamicValues();
 }
 
 MainWidget::~MainWidget()

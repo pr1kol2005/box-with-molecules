@@ -25,6 +25,8 @@ class Simulation {
 
   void RandomSpawn();
 
+  void ResetThermodynamicValues();
+
   std::vector<Particle>& GetGas();
   
   void AddParticle(const Particle& molecule);
