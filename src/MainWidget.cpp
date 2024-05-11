@@ -33,7 +33,11 @@ MainWidget::MainWidget(QWidget *parent, Simulation& simulation) : QWidget(parent
 // M — number of grid cells, N — number of particles
 // linear collision check is less precise
 void MainWidget::ManageCollisions() {
+  if (GRID_HEIGHT * GRID_WIDTH * 10 < PARTICLE_SPAWN_NUMBER * PARTICLE_SPAWN_NUMBER) {
+    simulation_.ManageCollisionsLinear();
+  } else {
   simulation_.ManageCollisionsSquared();
+  }
 }
 
 void MainWidget::MoveParticles() {
