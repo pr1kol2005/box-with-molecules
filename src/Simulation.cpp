@@ -11,6 +11,18 @@ Simulation::Simulation(std::vector<Particle>& gas, Box& box) : gas_(gas), box_(b
   //std::cout << grid_.size() << '\n';
 }
 
+void Simulation::RandomSpawn() {
+  std::srand(std::time(0));
+
+  for (int i = 0; i < PARTICLE_SPAWN_NUMBER; i++) {
+    AddParticle(Particle(Vector(PARTICLE_SIZE + (1 + (std::rand() % (GRID_WIDTH - 1))) * 2 * PARTICLE_SIZE,
+                                PARTICLE_SIZE + (1 + (std::rand() % (GRID_HEIGHT - 1))) * 2 * PARTICLE_SIZE),
+                         Vector(MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY),
+                                MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)),
+                         PARTICLE_SIZE, 1));                                
+  }
+}
+
 std::vector<Particle>& Simulation::GetGas() {
   return gas_;
 }

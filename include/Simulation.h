@@ -18,6 +18,8 @@ class Simulation {
 
   ~Simulation() = default;
 
+  void RandomSpawn();
+
   std::vector<Particle>& GetGas();
   
   void AddParticle(const Particle& molecule);
