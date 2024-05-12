@@ -28,6 +28,8 @@ file(GLOB_RECURSE SOURCES
     ${SOURCE_DIR}/*.cpp
 )
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
 #=================== SETUP EXECTUABLE ====================#
 
 # Add the forms directory to the AUTOUIC search paths

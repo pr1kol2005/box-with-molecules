@@ -9,13 +9,11 @@ brew install qt
 
 git clone git@gitlab.akhcheck.ru:kirill.grinko/box-with-molecules.git
 
-3) В файле CMakeLists.txt замените путь к папке с библиотекой Qt в этой строке:
-
-set(CMAKE_PREFIX_PATH <путь до папки>)
+3) Проверьте, что переменная окружения Qt6_DIR равна путю к папке с библиотекой Qt:
 
 4) Выполните сборку проекта:
 
-cmake .. -B ./build
+cmake -B build
 cd build
 make
 
