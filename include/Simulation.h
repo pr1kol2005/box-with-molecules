@@ -11,20 +11,35 @@
 class Simulation {
   std::vector<Particle> gas_;
   Box box_;
-  std::vector<Particle*>** grid_;
+  std::vector<std::vector<Particle*>> grid_;
+  double p_;
+  double v_avg_;
+  double E_avg_;
+  double kT_;
+
 
  public:
   Simulation(std::vector<Particle>& gas, Box& box);
 
-  ~Simulation();
+  ~Simulation() = default;
+
+  void RandomSpawn();
+
+  void ResetThermodynamicValues();
 
   std::vector<Particle>& GetGas();
   
   void AddParticle(const Particle& molecule);
 
   void RemoveParticle();
+
+  void BoxCollision(Particle* curr);
+
+  void ParticleCollision(Particle* curr, Particle* other);
   
-  void ManageCollisions();
+  void ManageCollisionsLinear();
+
+  void ManageCollisionsSquared();
 
   void MoveParticles(double timeStep);
 

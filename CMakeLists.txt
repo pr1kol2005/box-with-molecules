@@ -7,7 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #======================= INCLUSION OF Qt =======================#
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_PREFIX_PATH /Users/kirill_grinko/Qt/6.6.2/macos)
+if(NOT "$ENV{Qt6_DIR}" STREQUAL "")
+    set(CMAKE_PREFIX_PATH "$ENV{Qt6_DIR}")
+endif()
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Core)
