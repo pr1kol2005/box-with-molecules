@@ -6,6 +6,8 @@ USER root
 RUN apt update && apt install -y \
     libgl-dev \
     libvulkan-dev \
+    fuse \
+    libfuse2 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY . /home/user/project
