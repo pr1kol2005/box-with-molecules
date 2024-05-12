@@ -1,6 +1,7 @@
 #include "Simulation.h"
 
 #include <cmath>
+#include <ctime>
 #include <iostream>
 #include <random>
 
