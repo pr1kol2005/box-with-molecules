@@ -16,6 +16,8 @@ WORKDIR /home/user/project
 
 RUN qt-cmake ./ -G Ninja -B ./build && cmake --build ./build
 
+CMD ./build/box_with_molecules
+
 # RUN curl -Lo linuxdeploy https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage && \
 #     chmod +x linuxdeploy && \
 #     mv linuxdeploy /usr/local/bin/ && \
