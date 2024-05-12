@@ -17,7 +17,7 @@ MainWidget::MainWidget(QWidget *parent, Simulation& simulation) : QWidget(parent
   scene_->addRect(scene_->sceneRect());
 
   for (size_t i = 0; i < simulation.gas_.size(); i++) {
-    scene_->addItem(new ParticleImage(simulation_.gas_.data() + i));
+    scene_->addItem(new ParticleImage(&simulation_.gas_[i]));
   }
 
   ui_->label_1->setText(QString("N = ") + QString::number(PARTICLE_SPAWN_NUMBER));
