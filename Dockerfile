@@ -16,9 +16,9 @@ WORKDIR /home/user/project
 
 RUN qt-cmake ./ -G Ninja -B ./build && cmake --build ./build
 
-RUN curl -Lo linuxdeploy https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage && \
-    chmod +x linuxdeploy && \
-    mv linuxdeploy /usr/local/bin/ && \
-    mkdir ./build/deploy
+# RUN curl -Lo linuxdeploy https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage && \
+#     chmod +x linuxdeploy && \
+#     mv linuxdeploy /usr/local/bin/ && \
+#     mkdir ./build/deploy
 
-CMD linuxdeploy --plugin qt -e "$(find ./build -maxdepth 1 -type f -executable)" --appdir ./build/deploy
+# CMD linuxdeploy --plugin qt -e "$(find ./build -maxdepth 1 -type f -executable)" --appdir ./build/deploy
