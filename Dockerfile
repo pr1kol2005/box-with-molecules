@@ -1,11 +1,22 @@
-# Используем образ stateoftheartio/qt6:6.3-macos-aqt
-FROM stateoftheartio/qt6:6.3-macos-aqt
+#should work for non-arm64
+FROM stateoftheartio/qt6:6.3-gcc-aqt
 
-# Копируем файлы проекта внутрь контейнера
+USER root
+
+RUN apt update && apt install -y \
+    libgl-dev \
+    libvulkan-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY . /home/user/project
 
-# Устанавливаем рабочую директорию
-WORKDIR /home/user
+WORKDIR /home/user/project
 
-# Запускаем сборку проекта
-RUN qt-cmake ./project -G Ninja -B ./build && cmake --build ./build
+RUN qt-cmake ./ -G Ninja -B ./build && cmake --build ./build
+
+# RUN curl -Lo linuxdeploy https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage && \
+#     chmod +x linuxdeploy && \
+#     mv linuxdeploy /usr/local/bin/ && \
+#     mkdir ./build/deploy
+
+# CMD linuxdeploy --plugin qt -e "$(find ./build -maxdepth 1 -type f -executable)" --appdir ./build/deploy
