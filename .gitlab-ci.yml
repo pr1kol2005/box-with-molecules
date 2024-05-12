@@ -4,7 +4,7 @@ stages:
 
 BuildCode:
     stage: build
-    image: ubuntu:latest
+    image: gcc:latest
     tags:
         - common
     script:
