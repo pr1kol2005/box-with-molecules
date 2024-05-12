@@ -1,0 +1,19 @@
+stages:
+    - build
+#    - test
+
+BuildCode:
+    stage: build
+    image: ubuntu:latest
+    tags:
+        - common
+    script:
+        - apt-get update && apt-get install -y cmake qt6-base-dev
+        - cmake -B build
+        - cmake --build build --target box_with_molecules
+
+# TesCode:
+#     stage: build
+#     image: ubuntu:latest
+#     tags:
+#         -common
