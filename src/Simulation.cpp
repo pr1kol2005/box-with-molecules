@@ -18,8 +18,8 @@ void Simulation::RandomSpawn() {
   for (int i = 0; i < PARTICLE_SPAWN_NUMBER; i++) {
     AddParticle(Particle(Vector(PARTICLE_SIZE + (1 + (std::rand() % (GRID_WIDTH - 1))) * 2 * PARTICLE_SIZE,
                                 PARTICLE_SIZE + (1 + (std::rand() % (GRID_HEIGHT - 1))) * 2 * PARTICLE_SIZE),
-                         Vector((MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)) / 0.707,
-                                (MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)) / 0.707),
+                         Vector((MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)) * 0.707,
+                                (MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)) * 0.707),
                          PARTICLE_SIZE, 1));                                
   }
 }
