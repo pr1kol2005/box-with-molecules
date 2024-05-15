@@ -1,6 +1,6 @@
 stages:
     - build
-#    - test
+    - test
 
 BuildCode:
     stage: build
@@ -12,8 +12,13 @@ BuildCode:
         - cmake -B build
         - cmake --build build --target box_with_molecules
 
-# TesCode:
-#     stage: build
-#     image: ubuntu:latest
-#     tags:
-#         -common
+TesClangFormat:
+    stage: test
+    image: python:slim-bullseye
+    tags:
+        -common
+    script:
+        - apt-get update && apt-get install -y clang-format
+        - ./run-clang-format.py -r ./src
+        - ./run-clang-format.py -r ./include
+
