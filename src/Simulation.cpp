@@ -5,11 +5,12 @@
 #include <iostream>
 #include <random>
 
-Simulation::Simulation(std::vector<Particle>& gas, Box& box) : gas_(gas), box_(box) {
+Simulation::Simulation(std::vector<Particle> &gas, Box &box)
+    : gas_(gas), box_(box) {
   ResetThermodynamicValues();
   grid_.reserve(GRID_HEIGHT + 1);
   for (size_t i = 0; i <= GRID_HEIGHT; i++) {
-    grid_.emplace_back(std::vector<Particle*>(GRID_WIDTH + 1, nullptr));
+    grid_.emplace_back(std::vector<Particle *>(GRID_WIDTH + 1, nullptr));
   }
 }
 
@@ -17,11 +18,16 @@ void Simulation::RandomSpawn() {
   std::srand(std::time(0));
 
   for (int i = 0; i < PARTICLE_SPAWN_NUMBER; i++) {
-    AddParticle(Particle(Vector(PARTICLE_SIZE + (1 + (std::rand() % (GRID_WIDTH - 1))) * 2 * PARTICLE_SIZE,
-                                PARTICLE_SIZE + (1 + (std::rand() % (GRID_HEIGHT - 1))) * 2 * PARTICLE_SIZE),
-                         Vector((MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)) * 0.707,
-                                (MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)) * 0.707),
-                         PARTICLE_SIZE, 1));                                
+    AddParticle(Particle(
+        Vector(PARTICLE_SIZE +
+                   (1 + (std::rand() % (GRID_WIDTH - 1))) * 2 * PARTICLE_SIZE,
+               PARTICLE_SIZE +
+                   (1 + (std::rand() % (GRID_HEIGHT - 1))) * 2 * PARTICLE_SIZE),
+        Vector((MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)) *
+                   0.707,
+               (MAX_SPAWN_VELOCITY - std::rand() % (2 * MAX_SPAWN_VELOCITY)) *
+                   0.707),
+        PARTICLE_SIZE, 1));
   }
 }
 
@@ -32,19 +38,15 @@ void Simulation::ResetThermodynamicValues() {
   kT_ = 0;
 }
 
-std::vector<Particle>& Simulation::GetGas() {
-  return gas_;
-}
+std::vector<Particle> &Simulation::GetGas() { return gas_; }
 
-void Simulation::AddParticle(const Particle& molecule) {
+void Simulation::AddParticle(const Particle &molecule) {
   gas_.emplace_back(molecule);
 }
 
-void Simulation::RemoveParticle() {
-  gas_.pop_back();
-}
+void Simulation::RemoveParticle() { gas_.pop_back(); }
 
-void Simulation::BoxCollision(Particle* curr) {
+void Simulation::BoxCollision(Particle *curr) {
   Vector v = curr->velocity_;
   Vector p = curr->GetImpulse();
   Vector n = box_.GetNormal(curr->position_);
@@ -55,8 +57,9 @@ void Simulation::BoxCollision(Particle* curr) {
   p_ += dp_n;
 }
 
-void Simulation::ParticleCollision(Particle* curr, Particle* other) {
-  Vector n = (other->position_ - curr->position_) / (other->position_ - curr->position_).Length();
+void Simulation::ParticleCollision(Particle *curr, Particle *other) {
+  Vector n = (other->position_ - curr->position_) /
+             (other->position_ - curr->position_).Length();
   Vector t = n.Normal();
   Vector v1 = curr->velocity_;
   Vector v2 = other->velocity_;
@@ -77,7 +80,8 @@ void Simulation::ManageCollisionsLinear() {
 
   for (size_t i = 0; i < gas_.size(); ++i) {
     int x = std::abs((int)(gas_[i].position_.x_ / GRID_CELL_SIZE) % GRID_WIDTH);
-    int y = std::abs((int)(gas_[i].position_.y_ / GRID_CELL_SIZE) % GRID_HEIGHT);
+    int y =
+        std::abs((int)(gas_[i].position_.y_ / GRID_CELL_SIZE) % GRID_HEIGHT);
     grid_[y][x] = &gas_[i];
   }
 
@@ -86,7 +90,7 @@ void Simulation::ManageCollisionsLinear() {
 
   for (size_t i = 0; i <= GRID_HEIGHT; ++i) {
     for (size_t j = 0; j <= GRID_WIDTH; ++j) {
-      Particle* curr = grid_[i][j];
+      Particle *curr = grid_[i][j];
       if (curr == nullptr) {
         continue;
       }
@@ -98,8 +102,9 @@ void Simulation::ManageCollisionsLinear() {
       for (int k = 0; k < 9; k++) {
         int dy = dy_arr[k];
         int dx = dx_arr[k];
-        if (0 <= i + dy && i + dy <= GRID_HEIGHT && 0 <= j + dx && j + dx <= GRID_WIDTH) {
-          Particle* other = grid_[i + dy][j + dx];
+        if (0 <= i + dy && i + dy <= GRID_HEIGHT && 0 <= j + dx &&
+            j + dx <= GRID_WIDTH) {
+          Particle *other = grid_[i + dy][j + dx];
           if (other && curr->CheckCollision(*other)) {
             ParticleCollision(curr, other);
           }
@@ -116,7 +121,7 @@ void Simulation::ManageCollisionsSquared() {
       BoxCollision(&gas_[i]);
     }
     for (size_t j = i + 1; j < size; j++) {
-      if(gas_[i].CheckCollision(gas_[j])) {
+      if (gas_[i].CheckCollision(gas_[j])) {
         ParticleCollision(&gas_[i], &gas_[j]);
       }
     }
@@ -127,10 +132,14 @@ void Simulation::MoveParticles(double time_step) {
   for (size_t i = 0; i < gas_.size(); i++) {
     gas_[i].UpdatePosition(time_step);
     v_avg_ += gas_[i].velocity_.Length();
-    E_avg_ += gas_[i].mass_ * gas_[i].velocity_.Length() * gas_[i].velocity_.Length() / 2;
+    E_avg_ += gas_[i].mass_ * gas_[i].velocity_.Length() *
+              gas_[i].velocity_.Length() / 2;
   }
 }
 
-Vector AbsolutelyElasticCollision(const Vector& t, const Vector& v1, const Vector& v1_n, const Vector& v2_n, double m1, double m2) {
-  return t * v1.ScalarProduct(t) + (v1_n * (m1 - m2) + v2_n * 2 * m2) / (m1 + m2);
+Vector AbsolutelyElasticCollision(const Vector &t, const Vector &v1,
+                                  const Vector &v1_n, const Vector &v2_n,
+                                  double m1, double m2) {
+  return t * v1.ScalarProduct(t) +
+         (v1_n * (m1 - m2) + v2_n * 2 * m2) / (m1 + m2);
 }
