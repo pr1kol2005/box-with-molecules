@@ -1,6 +1,16 @@
 stages:
-    - build
     - test
+    - build
+
+TesClangFormat:
+    stage: test
+    image: python:slim-bullseye
+    tags:
+        -common
+    script:
+        - apt-get update && apt-get install -y clang-format
+        - ./run-clang-format.py -r ./src
+        - ./run-clang-format.py -r ./include    
 
 BuildCode:
     stage: build
@@ -11,6 +21,7 @@ BuildCode:
         - apt-get update && apt-get install -y cmake qt6-base-dev
         - cmake -B build
         - cmake --build build --target box_with_molecules
+<<<<<<< HEAD
 
 TesClangFormat:
     stage: test
@@ -22,3 +33,5 @@ TesClangFormat:
         - ./run-clang-format.py -r ./src
         - ./run-clang-format.py -r ./include
 
+=======
+>>>>>>> 550125c (change stage execute order)
