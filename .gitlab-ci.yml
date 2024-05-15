@@ -6,7 +6,7 @@ TesClangFormat:
     stage: test
     image: python:slim-bullseye
     tags:
-        -common
+        - common
     script:
         - apt-get update && apt-get install -y clang-format
         - ./run-clang-format.py -r ./src
