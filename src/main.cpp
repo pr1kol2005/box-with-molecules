@@ -1,9 +1,9 @@
-#include "Simulation.h"
 #include "MainWidget.h"
+#include "Simulation.h"
 
 #include <QApplication>
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   Box box(BOX_WIDTH, BOX_HEIGHT);
   std::vector<Particle> gas;
   Simulation simulation(gas, box);
