@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Vector.h"
 #include "Particle.h"
+#include "Vector.h"
 
 class Box {
   int width_;
@@ -10,7 +10,7 @@ class Box {
 public:
   Box(int width, int height);
 
-  Vector GetNormal(const Vector& pos) const;
+  Vector GetNormal(const Vector &pos) const;
 
-  bool CheckCollision(const Particle& particle);
+  bool CheckCollision(const Particle &particle);
 };
