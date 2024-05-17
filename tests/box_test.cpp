@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
 #include <vector>
 
-#include "constants.h"
 #include "Box.h"
 #include "Particle.h"
 #include "Simulation.h"
 #include "Vector.h"
+#include "constants.h"
 
 TEST(VectorTestCase, VectorTest) {
   Vector v1(1, 0);
@@ -37,7 +37,8 @@ TEST(SimulationTestCase, SimulationTest) {
   Simulation sim(gas, box);
   sim.RandomSpawn();
 
-  if (PARTICLE_SIZE * PARTICLE_SIZE * PARTICLE_SPAWN_NUMBER <= BOX_HEIGHT* BOX_WIDTH) {
+  if (PARTICLE_SIZE * PARTICLE_SIZE * PARTICLE_SPAWN_NUMBER <=
+      BOX_HEIGHT * BOX_WIDTH) {
     for (size_t i = 0; i < gas.size(); i++) {
       for (size_t j = i + 1; j < gas.size(); j++) {
         EXPECT_FALSE(gas[i].CheckCollision(gas[j]));

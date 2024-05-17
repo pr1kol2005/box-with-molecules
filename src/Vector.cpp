@@ -42,7 +42,7 @@ Vector &Vector::operator/=(double scalar) {
   return *this;
 }
 
-bool Vector::operator==(const Vector& other) const {
+bool Vector::operator==(const Vector &other) const {
   return x_ == other.x_ && y_ == other.y_;
 }
 
