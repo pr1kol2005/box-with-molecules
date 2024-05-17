@@ -62,6 +62,10 @@ enable_testing()
 add_executable(
   box_test
   tests/box_test.cpp
+  ${SOURCE_DIR}/Vector.cpp
+  ${SOURCE_DIR}/Box.cpp
+  ${SOURCE_DIR}/Particle.cpp
+  ${SOURCE_DIR}/Simulation.cpp
 )
 
 target_include_directories(box_test PUBLIC ${INCLUDE_DIR})
@@ -72,4 +76,4 @@ target_link_libraries(
 )
 
 include(GoogleTest)
-gtest_discover_tests(box_test XML_OUTPUT_DIR ${CMAKE_BINARY_DIR})
+gtest_discover_tests(box_test)
