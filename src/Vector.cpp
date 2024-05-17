@@ -42,6 +42,10 @@ Vector &Vector::operator/=(double scalar) {
   return *this;
 }
 
+bool Vector::operator==(const Vector& other) const {
+  return x_ == other.x_ && y_ == other.y_;
+}
+
 double Vector::Length() const { return std::sqrt(x_ * x_ + y_ * y_); }
 
 Vector Vector::Normal() const { return Vector(-y_, x_); }

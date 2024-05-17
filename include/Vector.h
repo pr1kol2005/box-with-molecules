@@ -25,6 +25,8 @@ public:
 
   Vector &operator/=(double scalar);
 
+  bool operator==(const Vector& other) const;
+
   double Length() const;
 
   Vector Normal() const;
