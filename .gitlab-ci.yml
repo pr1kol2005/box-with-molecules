@@ -15,9 +15,9 @@ TestCode:
   artifacts:
     when: always
     paths:
-      - box-with-molecules/build/box_test.xml
+      - /build/box_test.xml
     reports:
-      junit: box-with-molecules/build/box_test.xml
+      junit: /build/box_test.xml
 
 TesClangFormat:
     stage: test
