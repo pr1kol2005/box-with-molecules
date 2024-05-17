@@ -9,7 +9,7 @@ TestCode:
     - common
   script:
     - apt-get update && apt-get install -y cmake
-    - cmake -B build
+    - cmake -B build -D WITH_QT=OFF
     - cmake --build build --target box_test
     - bin/box_test --gtest_output=xml:"build/box_test.xml"
   artifacts:
