@@ -15,9 +15,9 @@ TestCode:
   artifacts:
     when: always
     paths:
-      - $CI_BUILDS_DIR/build/box_test.xml
+      - build/box_test.xml
     reports:
-      junit: $CI_BUILDS_DIR/build/box_test.xml
+      junit: build/box_test.xml
 
 TesClangFormat:
     stage: test
