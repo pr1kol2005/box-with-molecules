@@ -18,6 +18,8 @@ TestCode:
       - build/box_test.xml
     reports:
       junit: build/box_test.xml
+  except:
+    - dev    
 
 TesClangFormat:
     stage: test
@@ -28,6 +30,9 @@ TesClangFormat:
         - apt-get update && apt-get install -y clang-format
         - ./run-clang-format.py -r ./src
         - ./run-clang-format.py -r ./include    
+        - ./run-clang-format.py -r ./tests
+    except:
+        - dev    
 
 BuildCode:
     stage: build
@@ -38,3 +43,5 @@ BuildCode:
         - apt-get update && apt-get install -y cmake qt6-base-dev
         - cmake -B build
         - cmake --build build --target box_with_molecules
+    except:
+        - dev   
