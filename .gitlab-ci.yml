@@ -1,0 +1,47 @@
+stages:
+    - test
+    - build
+
+TestCode:
+  stage: test
+  image: gcc:latest
+  tags:
+    - common
+  script:
+    - apt-get update && apt-get install -y cmake
+    - cmake -B build -D WITH_QT=OFF
+    - cmake --build build --target box_test
+    - bin/box_test --gtest_output=xml:"build/box_test.xml"
+  artifacts:
+    when: always
+    paths:
+      - build/box_test.xml
+    reports:
+      junit: build/box_test.xml
+  except:
+    - dev    
+
+TesClangFormat:
+    stage: test
+    image: python:slim-bullseye
+    tags:
+        - common
+    script:
+        - apt-get update && apt-get install -y clang-format
+        - ./run-clang-format.py -r ./src
+        - ./run-clang-format.py -r ./include    
+        - ./run-clang-format.py -r ./tests
+    except:
+        - dev    
+
+BuildCode:
+    stage: build
+    image: gcc:latest
+    tags:
+        - common
+    script:
+        - apt-get update && apt-get install -y cmake qt6-base-dev
+        - cmake -B build
+        - cmake --build build --target box_with_molecules
+    except:
+        - dev   

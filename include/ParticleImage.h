@@ -2,18 +2,17 @@
 
 #include <QGraphicsItem>
 
-#include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
-
+#include <QGraphicsRectItem>
 
 #include "Particle.h"
 #include "constants.h"
 
 class ParticleImage : public QGraphicsEllipseItem {
-  Particle* molecule_;
+  Particle *molecule_;
 
- public:
-  ParticleImage(Particle* molecule);
+public:
+  ParticleImage(Particle *molecule);
 
   virtual void advance(int phase);
 };

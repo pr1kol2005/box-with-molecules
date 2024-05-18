@@ -9,17 +9,16 @@ brew install qt
 
 git clone git@gitlab.akhcheck.ru:kirill.grinko/box-with-molecules.git
 
-3) В файле CMakeLists.txt замените путь к папке с библиотекой Qt в этой строке:
-
-set(CMAKE_PREFIX_PATH <путь до папки>)
+3) Проверьте, что переменная окружения Qt6_DIR равна путю к папке с библиотекой Qt:
 
 4) Выполните сборку проекта:
 
-cmake .. -B ./build
+cmake -B build
 cd build
 make
 
-5) Запустите симуляцию:
+5) Запустите симуляцию (из директории bin):
+
 ./box_with_molecules
 
-В файле constants.h присутствуют константы BOX_WIDTH и BOX_HEIGHT, отвечащие непосредственно за ширину и высоту области молекулярной симуляции.
+В файле constants.h присутствуют константы BOX_WIDTH и BOX_HEIGHT, отвечащие за ширину и высоту области молекулярной симуляции.

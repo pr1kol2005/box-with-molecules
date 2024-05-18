@@ -5,13 +5,20 @@ project(box_with_molecules)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#======================= INCLUSION OF Qt =======================#
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_PREFIX_PATH /Users/kirill_grinko/Qt/6.6.2/macos)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
-find_package(Qt6 REQUIRED COMPONENTS Core)
-qt_standard_project_setup()
+#======================= INCLUSION OF Qt =======================#
+option(WITH_QT "Include Qt in the build" ON)
+
+if(WITH_QT)
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+    if(NOT "$ENV{Qt6_DIR}" STREQUAL "")
+        set(CMAKE_PREFIX_PATH "$ENV{Qt6_DIR}")
+    endif()
+
+    find_package(Qt6 REQUIRED COMPONENTS Widgets Core)
+    qt_standard_project_setup()
+endif()
 
 #=================== INCLUSION OF Project Files ====================#
 set(INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
@@ -19,7 +26,7 @@ set(SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 set(FORMS_DIR ${PROJECT_SOURCE_DIR}/forms)
 
 include_directories(${INCLUDE_DIR})
-#include_directories(${SOURCE_DIR})
+# include_directories(${SOURCE_DIR})
 include_directories(${FORMS_DIR})
 
 file(GLOB_RECURSE SOURCES
@@ -29,13 +36,44 @@ file(GLOB_RECURSE SOURCES
 )
 
 #=================== SETUP EXECTUABLE ====================#
-
 # Add the forms directory to the AUTOUIC search paths
-set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_AUTOUIC_SEARCH_PATHS} ${FORMS_DIR})
+if(WITH_QT)
+    set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_AUTOUIC_SEARCH_PATHS} ${FORMS_DIR})
+endif()
 
-# Add the executable
 add_executable(box_with_molecules ${SOURCES})
 
 #===================== LINKING LIBRARIES =======================#
-target_link_libraries(box_with_molecules Qt6::Widgets)
-target_link_libraries(box_with_molecules Qt6::Core)
+if(WITH_QT)
+    target_link_libraries(box_with_molecules Qt6::Widgets Qt6::Core)
+endif()
+
+#=================== SETUP TESTS ====================#
+include(FetchContent)
+set(DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+add_executable(
+  box_test
+  tests/box_test.cpp
+  ${SOURCE_DIR}/Vector.cpp
+  ${SOURCE_DIR}/Box.cpp
+  ${SOURCE_DIR}/Particle.cpp
+  ${SOURCE_DIR}/Simulation.cpp
+)
+
+target_include_directories(box_test PUBLIC ${INCLUDE_DIR})
+
+target_link_libraries(
+  box_test
+  GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(box_test)

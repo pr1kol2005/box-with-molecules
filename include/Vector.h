@@ -6,32 +6,34 @@ class Vector {
   double x_;
   double y_;
 
- public:
+public:
   Vector(double x, double y);
 
-  Vector operator+(const Vector& other) const;
+  Vector operator+(const Vector &other) const;
 
-  Vector operator-(const Vector& other) const;
+  Vector operator-(const Vector &other) const;
 
   Vector operator*(double scalar) const;
 
   Vector operator/(double scalar) const;
 
-  Vector& operator+=(const Vector& other);
+  Vector &operator+=(const Vector &other);
 
-  Vector& operator-=(const Vector& other);
+  Vector &operator-=(const Vector &other);
 
-  Vector& operator*=(double scalar);
+  Vector &operator*=(double scalar);
 
-  Vector& operator/=(double scalar);
+  Vector &operator/=(double scalar);
+
+  bool operator==(const Vector &other) const;
 
   double Length() const;
 
   Vector Normal() const;
 
-  double CrossProduct(const Vector& other) const;
+  double CrossProduct(const Vector &other) const;
 
-  double ScalarProduct(const Vector& other) const;
+  double ScalarProduct(const Vector &other) const;
 
   friend class Box;
   friend class GraphicsComponent;
