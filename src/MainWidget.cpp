@@ -2,10 +2,12 @@
 #include "ui_mainwidget.h"
 
 #include <cmath>
+#include <ctime>
+#include <fstream>
 #include <iostream>
 
 MainWidget::MainWidget(QWidget *parent, Simulation &simulation)
-    : QWidget(parent), ui_(new Ui::MainWidget), simulation_(simulation) {
+    : QWidget(parent), ui_(new Ui::MainWidget), simulation_(simulation), update_iteration_(0) {
   ui_->setupUi(this);
 
   resize(BOX_WIDTH + 100, BOX_HEIGHT + 100);
@@ -64,6 +66,22 @@ void MainWidget::UpdateValues() {
   ui_->label_5->setText(QString("E = ") +
                         QString::number(simulation_.E_));
   ui_->label_6->setText(QString("kT = ") + QString::number(simulation_.kT_));
+
+  std::ofstream file;
+  file.open("data/vpv.txt", std::ios::app);
+  if (file.is_open()) {
+    if (update_iteration_ == 0) {
+      std::time_t now = std::time(0);
+      file << "________________________________________\n" << std::ctime(&now);
+      file << "N = " << PARTICLE_SPAWN_NUMBER << ", V = " << simulation_.V_ << ", b = " << simulation_.b_ << ", delta_t = " << VALUE_UPDATE_INTERVAL << '\n';
+      file << "i | p | <v> | E | kT |\n";
+    }
+    file << update_iteration_++ << ' ' << simulation_.p_ << ' ' << simulation_.v_avg_ << ' ' << simulation_.E_ << ' ' << simulation_.kT_ << '\n';
+    file.close();
+  } else {
+    std::cerr << "Unable to open file";
+  }
+
   simulation_.ResetThermodynamicValues();
 }
 

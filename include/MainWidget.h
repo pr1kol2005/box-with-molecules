@@ -30,6 +30,7 @@ class MainWidget : public QWidget {
   QTimer *timer_;
   QTimer *value_timer_;
   Simulation simulation_;
+  int update_iteration_;
 
 public:
   explicit MainWidget(QWidget *parent, Simulation &simulation);
