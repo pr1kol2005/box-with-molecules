@@ -23,11 +23,8 @@ MainWidget::MainWidget(QWidget *parent, Simulation &simulation)
   ui_->label_1->setText(QString("N = ") +
                         QString::number(PARTICLE_SPAWN_NUMBER));
 
-  ui_->label_2->setText(
-      QString("V - b = ") +
-      QString::number(BOX_WIDTH * BOX_HEIGHT * (2 * PARTICLE_SIZE) -
-                      PARTICLE_SPAWN_NUMBER * (4 / 3) * 3.14 *
-                          std::pow(PARTICLE_SIZE, 3)));
+  ui_->label_2->setText(QString("V - b = ") +
+      QString::number(simulation_.V_ - simulation_.b_));
 
   timer_ = new QTimer(this);
   value_timer_ = new QTimer(this);

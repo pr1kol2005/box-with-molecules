@@ -16,6 +16,8 @@ class Simulation {
   double v_avg_;
   double E_;
   double kT_;
+  double V_;
+  double b_;
 
 public:
   Simulation(std::vector<Particle> &gas, Box &box);

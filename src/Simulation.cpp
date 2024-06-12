@@ -12,6 +12,8 @@ Simulation::Simulation(std::vector<Particle> &gas, Box &box)
   for (size_t i = 0; i <= GRID_HEIGHT; i++) {
     grid_.emplace_back(std::vector<Particle *>(GRID_WIDTH + 1, nullptr));
   }
+  V_ = BOX_WIDTH * BOX_HEIGHT * (2 * PARTICLE_SIZE);
+  b_ = PARTICLE_SPAWN_NUMBER * 3.14 * std::pow(PARTICLE_SIZE, 3) * 4 / 3;
 }
 
 void Simulation::RandomSpawn() {
