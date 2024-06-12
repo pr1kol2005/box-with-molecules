@@ -34,7 +34,7 @@ void Simulation::RandomSpawn() {
 void Simulation::ResetThermodynamicValues() {
   p_ = 0;
   v_avg_ = 0;
-  E_avg_ = 0;
+  E_ = 0;
   kT_ = 0;
 }
 
@@ -132,7 +132,7 @@ void Simulation::MoveParticles(double time_step) {
   for (size_t i = 0; i < gas_.size(); i++) {
     gas_[i].UpdatePosition(time_step);
     v_avg_ += gas_[i].velocity_.Length();
-    E_avg_ += gas_[i].mass_ * gas_[i].velocity_.Length() *
+    E_ += gas_[i].mass_ * gas_[i].velocity_.Length() *
               gas_[i].velocity_.Length() / 2;
   }
 }

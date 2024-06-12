@@ -58,14 +58,14 @@ void MainWidget::UpdateValues() {
       (TIME_INTERVAL * (VALUE_UPDATE_INTERVAL / FPS *
                         (2 * 2 * PARTICLE_SIZE * (BOX_HEIGHT + BOX_WIDTH))));
   simulation_.v_avg_ /= (PARTICLE_SPAWN_NUMBER * VALUE_UPDATE_INTERVAL / FPS);
-  simulation_.E_avg_ /= (PARTICLE_SPAWN_NUMBER * VALUE_UPDATE_INTERVAL / FPS);
-  simulation_.kT_ = ((simulation_.E_avg_ / 3) * 2);
+  simulation_.E_ /= (VALUE_UPDATE_INTERVAL / FPS);
+  simulation_.kT_ = ((simulation_.E_ / (3 * PARTICLE_SPAWN_NUMBER)) * 2);
 
   ui_->label_3->setText(QString("p = ") + QString::number(simulation_.p_));
   ui_->label_4->setText(QString("<v> = ") +
                         QString::number(simulation_.v_avg_));
-  ui_->label_5->setText(QString("<E> = ") +
-                        QString::number(simulation_.E_avg_));
+  ui_->label_5->setText(QString("E = ") +
+                        QString::number(simulation_.E_));
   ui_->label_6->setText(QString("kT = ") + QString::number(simulation_.kT_));
   simulation_.ResetThermodynamicValues();
 }
