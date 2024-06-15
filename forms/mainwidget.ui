@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>365</width>
+    <width>507</width>
     <height>250</height>
    </rect>
   </property>
@@ -153,6 +153,13 @@
        </property>
        <property name="text">
         <string>kT = 0</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>P(V - b) / NkT = ?</string>
        </property>
       </widget>
      </item>
