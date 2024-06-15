@@ -54,11 +54,11 @@ void MainWidget::MoveParticles() { simulation_.MoveParticles(TIME_INTERVAL); }
 
 void MainWidget::UpdateValues() {
   simulation_.p_ /=
-      (TIME_INTERVAL * (VALUE_UPDATE_INTERVAL / FPS *
-                        (2 * 2 * PARTICLE_SIZE * (BOX_HEIGHT + BOX_WIDTH))));
+      (TIME_INTERVAL * (VALUE_UPDATE_INTERVAL / FPS) *
+                        (2 * (BOX_HEIGHT + BOX_WIDTH)));
   simulation_.v_avg_ /= (PARTICLE_SPAWN_NUMBER * VALUE_UPDATE_INTERVAL / FPS);
   simulation_.E_ /= (VALUE_UPDATE_INTERVAL / FPS);
-  simulation_.kT_ = ((simulation_.E_ / (3 * PARTICLE_SPAWN_NUMBER)) * 2);
+  simulation_.kT_ = (simulation_.E_ / PARTICLE_SPAWN_NUMBER);
 
   ui_->label_3->setText(QString("p = ") + QString::number(simulation_.p_));
   ui_->label_4->setText(QString("<v> = ") +
@@ -66,6 +66,8 @@ void MainWidget::UpdateValues() {
   ui_->label_5->setText(QString("E = ") +
                         QString::number(simulation_.E_));
   ui_->label_6->setText(QString("kT = ") + QString::number(simulation_.kT_));
+  ui_->label_7->setText(QString("P(V - b) / NkT = ") + QString::number(simulation_.p_ * (simulation_.V_ - simulation_.b_) / (PARTICLE_SPAWN_NUMBER * simulation_.kT_)));
+  
 
   std::ofstream file;
   file.open("data/vpv.txt", std::ios::app);
