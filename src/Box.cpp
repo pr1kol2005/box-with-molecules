@@ -22,7 +22,13 @@ Vector Box::GetNormal(const Vector &pos) const {
 
 bool Box::CheckCollision(const Particle &particle) {
   double gap = particle.radius_;
-  return (particle.position_.x_ <= gap) || (particle.position_.y_ <= gap) ||
+  return ((particle.position_.x_ <= gap) || (particle.position_.y_ <= gap) ||
          ((width_ - particle.position_.x_) <= gap) ||
-         ((height_ - particle.position_.y_) <= gap);
+         ((height_ - particle.position_.y_) <= gap));
 };
+
+bool Box::OutOfBoundaries(const Particle &particle) {
+  double gap = particle.radius_;
+  //return (particle.position_.y_ <= gap);
+  return false;
+}

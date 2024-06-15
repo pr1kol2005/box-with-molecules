@@ -13,4 +13,6 @@ public:
   Vector GetNormal(const Vector &pos) const;
 
   bool CheckCollision(const Particle &particle);
+
+  bool OutOfBoundaries(const Particle &particle);
 };
