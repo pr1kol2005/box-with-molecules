@@ -42,7 +42,7 @@ MainWidget::MainWidget(QWidget *parent, Simulation &simulation)
 // M — number of grid cells, N — number of particles
 // linear collision check is less precise
 void MainWidget::ManageCollisions() {
-  if (GRID_HEIGHT * GRID_WIDTH * 10 <
+  if (GRID_HEIGHT * GRID_WIDTH * 100 <
       PARTICLE_SPAWN_NUMBER * PARTICLE_SPAWN_NUMBER) {
     simulation_.ManageCollisionsLinear();
   } else {
@@ -76,9 +76,12 @@ void MainWidget::UpdateValues() {
       std::time_t now = std::time(0);
       file << "________________________________________\n" << std::ctime(&now);
       file << "N = " << PARTICLE_SPAWN_NUMBER << ", V = " << simulation_.V_ << ", b = " << simulation_.b_ << ", delta_t = " << VALUE_UPDATE_INTERVAL << '\n';
-      file << "i | p | <v> | E | kT |\n";
     }
-    file << update_iteration_++ << ' ' << simulation_.p_ << ' ' << simulation_.v_avg_ << ' ' << simulation_.E_ << ' ' << simulation_.kT_ << '\n';
+    for (auto& particle : simulation_.gas_) {
+      file << particle.GetImpulse().Length() << ' ';
+    }
+    file << '\n';
+    update_iteration_++;
     file.close();
   } else {
     std::cerr << "Unable to open file";
