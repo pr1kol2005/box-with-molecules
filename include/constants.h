@@ -10,9 +10,9 @@ const int VALUE_UPDATE_INTERVAL = 1000;
 
 const int BOX_WIDTH = 800;
 
-const int BOX_HEIGHT = 600;
+const int BOX_HEIGHT = 800;
 
-const int PARTICLE_SIZE = 5;
+const int PARTICLE_SIZE = 4;
 
 const int PARTICLE_SPAWN_NUMBER = 200;
 
