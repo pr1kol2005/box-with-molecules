@@ -81,6 +81,9 @@ void Simulation::ManageCollisionsLinear() {
   }
 
   for (size_t i = 0; i < gas_.size(); ++i) {
+    if (box_.OutOfBoundaries(gas_[i])) {
+      continue;
+    }
     int x = std::abs((int)(gas_[i].position_.x_ / GRID_CELL_SIZE) % GRID_WIDTH);
     int y =
         std::abs((int)(gas_[i].position_.y_ / GRID_CELL_SIZE) % GRID_HEIGHT);
@@ -119,6 +122,9 @@ void Simulation::ManageCollisionsLinear() {
 void Simulation::ManageCollisionsSquared() {
   size_t size = gas_.size();
   for (size_t i = 0; i < size; i++) {
+    if (box_.OutOfBoundaries(gas_[i])) {
+      continue;
+    }
     if (box_.CheckCollision(gas_[i])) {
       BoxCollision(&gas_[i]);
     }
@@ -133,6 +139,9 @@ void Simulation::ManageCollisionsSquared() {
 void Simulation::MoveParticles(double time_step) {
   for (size_t i = 0; i < gas_.size(); i++) {
     gas_[i].UpdatePosition(time_step);
+    if (box_.OutOfBoundaries(gas_[i])) {
+      continue;
+    }
     v_avg_ += gas_[i].velocity_.Length();
     E_ += gas_[i].mass_ * gas_[i].velocity_.Length() *
               gas_[i].velocity_.Length() / 2;
