@@ -7,7 +7,8 @@
 #include <iostream>
 
 MainWidget::MainWidget(QWidget *parent, Simulation &simulation)
-    : QWidget(parent), ui_(new Ui::MainWidget), simulation_(simulation), update_iteration_(0) {
+    : QWidget(parent), ui_(new Ui::MainWidget), simulation_(simulation),
+      update_iteration_(0) {
   ui_->setupUi(this);
 
   resize(BOX_WIDTH + 100, BOX_HEIGHT + 100);
@@ -26,7 +27,7 @@ MainWidget::MainWidget(QWidget *parent, Simulation &simulation)
                         QString::number(PARTICLE_SPAWN_NUMBER));
 
   ui_->label_2->setText(QString("V - b = ") +
-      QString::number(simulation_.V_ - simulation_.b_));
+                        QString::number(simulation_.V_ - simulation_.b_));
 
   timer_ = new QTimer(this);
   value_timer_ = new QTimer(this);
@@ -53,9 +54,8 @@ void MainWidget::ManageCollisions() {
 void MainWidget::MoveParticles() { simulation_.MoveParticles(TIME_INTERVAL); }
 
 void MainWidget::UpdateValues() {
-  simulation_.p_ /=
-      (TIME_INTERVAL * (VALUE_UPDATE_INTERVAL / FPS) *
-                        (2 * (BOX_HEIGHT + BOX_WIDTH)));
+  simulation_.p_ /= (TIME_INTERVAL * (VALUE_UPDATE_INTERVAL / FPS) *
+                     (2 * (BOX_HEIGHT + BOX_WIDTH)));
   simulation_.v_avg_ /= (PARTICLE_SPAWN_NUMBER * VALUE_UPDATE_INTERVAL / FPS);
   simulation_.E_ /= (VALUE_UPDATE_INTERVAL / FPS);
   simulation_.kT_ = (simulation_.E_ / PARTICLE_SPAWN_NUMBER);
@@ -63,11 +63,12 @@ void MainWidget::UpdateValues() {
   ui_->label_3->setText(QString("p = ") + QString::number(simulation_.p_));
   ui_->label_4->setText(QString("<v> = ") +
                         QString::number(simulation_.v_avg_));
-  ui_->label_5->setText(QString("E = ") +
-                        QString::number(simulation_.E_));
+  ui_->label_5->setText(QString("E = ") + QString::number(simulation_.E_));
   ui_->label_6->setText(QString("kT = ") + QString::number(simulation_.kT_));
-  ui_->label_7->setText(QString("P(V - b) / NkT = ") + QString::number(simulation_.p_ * (simulation_.V_ - simulation_.b_) / (PARTICLE_SPAWN_NUMBER * simulation_.kT_)));
-  
+  ui_->label_7->setText(
+      QString("P(V - b) / NkT = ") +
+      QString::number(simulation_.p_ * (simulation_.V_ - simulation_.b_) /
+                      (PARTICLE_SPAWN_NUMBER * simulation_.kT_)));
 
   std::ofstream file;
   file.open("data/vpv.txt", std::ios::app);
@@ -75,9 +76,11 @@ void MainWidget::UpdateValues() {
     if (update_iteration_ == 0) {
       std::time_t now = std::time(0);
       file << "________________________________________\n" << std::ctime(&now);
-      file << "N = " << PARTICLE_SPAWN_NUMBER << ", V = " << simulation_.V_ << ", b = " << simulation_.b_ << ", delta_t = " << VALUE_UPDATE_INTERVAL << '\n';
+      file << "N = " << PARTICLE_SPAWN_NUMBER << ", V = " << simulation_.V_
+           << ", b = " << simulation_.b_
+           << ", delta_t = " << VALUE_UPDATE_INTERVAL << '\n';
     }
-    for (auto& particle : simulation_.gas_) {
+    for (auto &particle : simulation_.gas_) {
       file << particle.GetImpulse().Length() << ' ';
     }
     file << '\n';

@@ -144,7 +144,7 @@ void Simulation::MoveParticles(double time_step) {
     }
     v_avg_ += gas_[i].velocity_.Length();
     E_ += gas_[i].mass_ * gas_[i].velocity_.Length() *
-              gas_[i].velocity_.Length() / 2;
+          gas_[i].velocity_.Length() / 2;
   }
 }
 
