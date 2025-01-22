@@ -13,7 +13,7 @@ The program is a simulation of a weakly non-ideal gas in two-dimensional space, 
 
 1) Make sure you have Homebrew installed and run the following commands:
 
-   ```sh
+  ```sh
   brew install g++;
   brew install cmake;
   brew install qt
