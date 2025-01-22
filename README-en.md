@@ -58,5 +58,5 @@ User can run unit tests:
 Additionally, the code style can be checked for compliance by running a specific script:
 
   ```sh
-  ./run-clang-format.py -r <директория, файлы в которой нужно проверить>
+  ./run-clang-format.py -r <directory containing files to check>
   ```
